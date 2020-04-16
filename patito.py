@@ -3,6 +3,7 @@ import ply.yacc as yacc
 
 variablesTable = {}
 auxiliaryUtility = {}
+FuncDir = {}
 
 reserved = {
     'programa' : 'PROGRAMA',
@@ -261,12 +262,14 @@ def p_funcion(p):
         p[0] = (p[1], p[2])
     else:
         p[0] = p[1]
+    DirFunc = { 'id-name' : p[1], 'type': 'void', 'parametros': p[2]}
 
 def p_funcionp(p):
     '''
     funcionp : tipoRetorno ID L_PARENTHESIS parametro R_PARENTHESIS var bloque funcion
     '''
     p[0] = (p[1], p[2], p[3], p[4], p[5], p[6], p[7], p[8])
+    DirFunc = { 'id-name' : p[2], 'type': p[1], 'parametros': p[4]} 
 
 def p_parametro(p):
     '''
